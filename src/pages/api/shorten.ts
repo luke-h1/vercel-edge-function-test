@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
+import { setUrl } from "../../lib/redis";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  res.status(200).json({})
+  const { url } = req.body;
+  const short = await setUrl(url);
+
+  res.status(200).json({ url, short });
 }

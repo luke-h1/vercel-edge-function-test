@@ -17,3 +17,8 @@ export async function setUrl(url: string) {
   await redis.set(`short/${short}`, url);
   return short;
 }
+
+export async function getUrl(short: string): Promise<string> {
+  const { data } = await redis.get(`short/${short}`);
+  return data;
+}
